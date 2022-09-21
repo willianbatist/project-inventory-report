@@ -36,16 +36,16 @@ class SimpleReport:
     @staticmethod
     def generate(productList):
         date = "3000-12-31"
-        date_old = datetime.strptime(date, "%Y-%m-%d")
-        date_validity = datetime.strptime(date, "%Y-%m-%d")
+        date_old = datetime.strptime(date, "%Y-%m-%d").date()
+        date_validity = datetime.strptime(date, "%Y-%m-%d").date()
         repetition = {}
         for row in productList:
             date_fab = datetime.strptime(
                 row["data_de_fabricacao"], "%Y-%m-%d"
-            )
+            ).date()
             date_val = datetime.strptime(
                 row["data_de_validade"], "%Y-%m-%d"
-            )
+            ).date()
             if date_old > date_fab:
                 date_old = date_fab
             if date_validity > date_val:
@@ -56,7 +56,7 @@ class SimpleReport:
             disruption_list_companies = [
                 (value, key) for value, key in repetition.items()
             ]
-        company = max(disruption_list_companies)[1]
+        company = max(disruption_list_companies)[0]
         return (
             f"Data de fabricação mais antiga: {date_old}\n"
             f"Data de validade mais próxima: {date_val}\n"
