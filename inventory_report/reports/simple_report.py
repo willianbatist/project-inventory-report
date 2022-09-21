@@ -4,7 +4,7 @@ from datetime import datetime
 class SimpleReport:
     @staticmethod
     def generate(productList):
-        date = "3000-12-31"
+        date = "9999-12-31"
         date_old = datetime.strptime(date, "%Y-%m-%d").date()
         date_validity = datetime.strptime(date, "%Y-%m-%d").date()
         repetition = {}
@@ -22,10 +22,7 @@ class SimpleReport:
             if row["nome_da_empresa"] not in repetition:
                 repetition[row["nome_da_empresa"]] = 0
             repetition[row["nome_da_empresa"]] += 1
-            disruption_list_companies = [
-                (value, key) for value, key in repetition.items()
-            ]
-        company = max(disruption_list_companies)[0]
+        company = max(repetition, key=repetition.get)
         return (
             f"Data de fabricação mais antiga: {date_old}\n"
             f"Data de validade mais próxima: {date_val}\n"

@@ -4,10 +4,7 @@ from inventory_report.reports.simple_report import SimpleReport
 
 
 def render_report(repetition, date_old, date_validity):
-    disruption_list_companies = [
-        (value, key) for value, key in repetition.items()
-    ]
-    company = max(disruption_list_companies)[0]
+    company = max(repetition, key=repetition.get)
     result = (
         f"Data de fabricação mais antiga: {date_old}\n"
         f"Data de validade mais próxima: {date_validity}\n"
