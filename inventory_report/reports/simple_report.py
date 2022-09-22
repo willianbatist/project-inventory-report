@@ -25,6 +25,6 @@ class SimpleReport:
         company = max(repetition, key=repetition.get)
         return (
             f"Data de fabricação mais antiga: {date_old}\n"
-            f"Data de validade mais próxima: {date_val}\n"
+            f"Data de validade mais próxima: {date_validity}\n"
             f"Empresa com mais produtos: {company}"
         )
